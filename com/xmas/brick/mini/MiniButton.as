@@ -39,6 +39,7 @@ package com.xmas.brick.mini {
 		
 		private function core_draw(e:BrickEvent):void {
 			buttonCore.referSize(miniLabel, 4, 0);
+			trace("fcukk",buttonCore.width)
 			drawSkin(overSkin.graphics, MiniStyle.fillOverColor, MiniStyle.borderColor);
 			drawSkin(normalSkin.graphics, MiniStyle.fillColor, MiniStyle.borderColor);
 			drawSkin(enabledSkin.graphics, MiniStyle.fillEnabledColor, MiniStyle.borderColor);
