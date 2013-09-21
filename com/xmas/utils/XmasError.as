@@ -13,14 +13,15 @@ package com.xmas.utils {
 			if (errorID < length) {
 				super(wildcard.replace(pool[errorID], arg), errorID);
 			} else {
-				throw(new XmasError(0))
+				throw(new XmasError(0,errorID,length))
 			}
 		}
 		
 		static private function get initPool():Vector.<String> {
 			var _pool:Vector.<String> = new Vector.<String>();
-			_pool.push("使用了错误的\"errorID\"")
+			_pool.push("使用了错误的\"errorID\" errorID: {0} 超过了，已拥有的错误总数: {0} .")
 			_pool.push("激活Drager类时area对象必须在舞台上")
+			_pool.push("请在执行action方法后使用本方法")
 			return _pool;
 		}
 	}

@@ -7,12 +7,15 @@ package com.xmas.utils {
 	import flash.events.IEventDispatcher;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
+	import flash.ui.Mouse;
+	import flash.ui.MouseCursor;
 	
 	public class Drager extends EventDispatcher {
 		/**
 		 * 限制区域
 		 */
 		public var boundRect:Rectangle;
+		private var _useHandCursor:Boolean;
 		private var changeX:Number;
 		private var changeY:Number;
 		private var area:InteractiveObject;
@@ -46,6 +49,7 @@ package com.xmas.utils {
 		}
 		
 		public function upbound():void {
+			checkUse()
 			dragObject.x = bound(dragObject.x, boundRect.left, boundRect.right);
 			dragObject.y = bound(dragObject.y, boundRect.top, boundRect.bottom);
 		}
@@ -56,6 +60,39 @@ package com.xmas.utils {
 		
 		public function set boundStage(value:Boolean):void {
 			_boundStage = value;
+		}
+		
+		private function checkUse():void {
+			if (area == null) {
+				throw(new XmasError(2)); //
+			}
+		}
+		
+		public function get useHandCursor():Boolean {
+			return _useHandCursor;
+		}
+		
+		public function set useHandCursor(value:Boolean):void {
+			checkUse()
+			if (_useHandCursor != value) {
+				if (value) {
+					area.addEventListener(MouseEvent.MOUSE_OVER, area_mouseOver);
+					area.addEventListener(MouseEvent.MOUSE_OUT, area_mouseOut);
+				} else {
+					
+					area.removeEventListener(MouseEvent.MOUSE_OVER, area_mouseOver);
+					area.removeEventListener(MouseEvent.MOUSE_OUT, area_mouseOut);
+				}
+			}
+			_useHandCursor = value;
+		}
+		
+		private function area_mouseOut(e:MouseEvent):void {
+			Mouse.cursor = MouseCursor.AUTO;
+		}
+		
+		private function area_mouseOver(e:MouseEvent):void {
+			Mouse.cursor = MouseCursor.HAND;
 		}
 		
 		private function this_addedToStage(e:Event):void {
@@ -88,7 +125,7 @@ package com.xmas.utils {
 		
 		private function this_mouseMove(e:Event):void {
 			_mouseX = boundStage ? bound(_stage.mouseX, 0, _stage.stageWidth) : _stage.mouseX;
-			_mouseY = boundStage ? bound(_stage.mouseY, 0, _stage.stageHeight) : _stage.mouseX;
+			_mouseY = boundStage ? bound(_stage.mouseY, 0, _stage.stageHeight) : _stage.mouseY;
 			if (boundRect == null) {
 				dragObject.x = dragObject.x + _mouseX - changeX
 				dragObject.y = dragObject.y + _mouseY - changeY;
