@@ -13,7 +13,7 @@ package com.xmas.kits {
 			addChild(_scrollbarVo.barSkin)
 			addChild(_scrollbarVo.downSkin)
 			addChild(_scrollbarVo.upSkin)
-			//_scrollbarVo.upSkin.addEventListener(MouseEvent.CLICK, upSkin_click);
+			_scrollbarVo.upSkin.addEventListener(MouseEvent.CLICK, upSkin_click);
 			//_scrollbarVo.downSkin.addEventListener(MouseEvent.CLICK, downSkin_click);
 			//_scrollbarVo.barSkin
 			//_scrollbarVo.lineNumber
@@ -21,8 +21,8 @@ package com.xmas.kits {
 		//private function downSkin_click(e:MouseEvent):void {
 		//_scrollbarVo.barSkin.tutor.
 		//}
-		//private function upSkin_click(e:MouseEvent):void {
-		//}
+		private function upSkin_click(e:MouseEvent):void {
+		}
 		//public function get ratioX():Number {
 		//return _scrollbarVo.barSkin.tutor.tutorX;
 		//}
