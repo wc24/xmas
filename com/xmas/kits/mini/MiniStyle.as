@@ -1,4 +1,5 @@
 package com.xmas.kits.mini {
+	import flash.display.Graphics;
 	import flash.filters.DropShadowFilter;
 	import flash.text.Font;
 	import flash.text.TextFormat;
@@ -20,7 +21,7 @@ package com.xmas.kits.mini {
 		static public var textEnabledColor:uint = 0x888888
 		static public var defaultTextFormat:TextFormat = new TextFormat(rondaFont.fontName, 8, textColor);
 		static public var dropShadow:uint = 0x222222
-		static public var panelBackground:uint = 0xBBBBBB;
+		static public var panelBackground:uint = 0xAAAAAA;
 		static public var windowBackground:uint = 0xEEEEEE;
 		
 		public function MiniStyle() {
@@ -28,6 +29,19 @@ package com.xmas.kits.mini {
 		
 		static public function getShadow(dist:Number, knockout:Boolean = false):DropShadowFilter {
 			return new DropShadowFilter(dist, 45, MiniStyle.dropShadow, 1, dist, dist, .3, 1, knockout);
+		}
+		
+		/**
+		 * 快速画图
+		 */
+		static public function drawSkin(graphics:Graphics, fill:uint, line:uint, width:int, height:int):void {
+			graphics.clear()
+			graphics.beginFill(line, 1);
+			graphics.drawRect(0, 0, width, height);
+			graphics.drawRect(1, 1, width - 2, height - 2);
+			graphics.beginFill(fill, 1);
+			graphics.drawRect(1, 1, width - 2, height - 2);
+			graphics.endFill();
 		}
 	}
 }

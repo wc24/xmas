@@ -79,7 +79,6 @@ package com.xmas.utils {
 					area.addEventListener(MouseEvent.MOUSE_OVER, area_mouseOver);
 					area.addEventListener(MouseEvent.MOUSE_OUT, area_mouseOut);
 				} else {
-					
 					area.removeEventListener(MouseEvent.MOUSE_OVER, area_mouseOver);
 					area.removeEventListener(MouseEvent.MOUSE_OUT, area_mouseOut);
 				}
@@ -118,25 +117,32 @@ package com.xmas.utils {
 		}
 		
 		private function this_mouseDown(e:MouseEvent):void {
-			changeX = _stage.mouseX;
-			changeY = _stage.mouseY;
+			//changeX = _stage.mouseX;
+			//changeY = _stage.mouseY;
+			changeX = dragObject.x - _stage.mouseX;
+			changeY = dragObject.y - _stage.mouseY;
 			_stage.addEventListener(Event.ENTER_FRAME, this_mouseMove);
 		}
 		
 		private function this_mouseMove(e:Event):void {
 			_mouseX = boundStage ? bound(_stage.mouseX, 0, _stage.stageWidth) : _stage.mouseX;
 			_mouseY = boundStage ? bound(_stage.mouseY, 0, _stage.stageHeight) : _stage.mouseY;
-			if (boundRect == null) {
-				dragObject.x = dragObject.x + _mouseX - changeX
-				dragObject.y = dragObject.y + _mouseY - changeY;
-			} else {
-				dragObject.x = bound(dragObject.x + _mouseX - changeX, boundRect.left, boundRect.right);
-				dragObject.y = bound(dragObject.y + _mouseY - changeY, boundRect.top, boundRect.bottom);
+			if (_mouseX != changeX || _mouseY != changeY) {
+				if (boundRect == null) {
+					//dragObject.x = dragObject.x + _mouseX - changeX
+					//dragObject.y = dragObject.y + _mouseY - changeY;
+					dragObject.x = _mouseX + changeX
+					dragObject.y = _mouseY + changeY;
+				} else {
+					//dragObject.x = bound(dragObject.x + _mouseX - changeX, boundRect.left, boundRect.right);
+					//dragObject.y = bound(dragObject.y + _mouseY - changeY, boundRect.top, boundRect.bottom);
+					dragObject.x = bound(_mouseX + changeX, boundRect.left, boundRect.right);
+					dragObject.y = bound(_mouseY + changeY, boundRect.top, boundRect.bottom);
+				}
+				//changeX = _mouseX;
+				//changeY = _mouseY;
+				dispatchEvent(new DragerEvent(DragerEvent.DRAG, true, false, dragObject.x, dragObject.y));
 			}
-			if (_mouseX != changeX && _mouseY != changeY) {
-			}
-			changeX = _mouseX;
-			changeY = _mouseY;
 		}
 		
 		private function deactivate():void {

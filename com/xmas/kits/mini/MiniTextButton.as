@@ -1,6 +1,4 @@
 package com.xmas.kits.mini {
-	import com.xmas.brick.core.BrickBase;
-	import com.xmas.brick.core.TextButtonCore;
 	import com.xmas.kits.TextButton;
 	import com.xmas.kits.vo.TextButtonVo;
 	import flash.text.TextField;

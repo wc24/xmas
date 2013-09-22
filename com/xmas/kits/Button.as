@@ -35,6 +35,7 @@ package com.xmas.kits {
 			addChild(_overSkin)
 			addChild(_disableSkin)
 			addChild(_buttonVo.label)
+			state = Button.NORMAL
 		}
 		private function mouseDown(e:MouseEvent):void {
 			state = Button.DOWN
