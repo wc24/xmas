@@ -10,6 +10,7 @@ package com.xmas.utils {
 	import flash.ui.Mouse;
 	import flash.ui.MouseCursor;
 	
+	[Event(name="drag", type="com.xmas.utils.DragerEvent")]
 	public class Drager extends EventDispatcher {
 		/**
 		 * 限制区域

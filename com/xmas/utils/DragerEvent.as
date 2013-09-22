@@ -1,5 +1,6 @@
 package com.xmas.utils {
 	import flash.display.InteractiveObject;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	/**
@@ -11,6 +12,14 @@ package com.xmas.utils {
 		
 		public function DragerEvent(type:String, bubbles:Boolean = true, cancelable:Boolean = false, localX:Number = 0, localY:Number = 0, relatedObject:InteractiveObject = null, ctrlKey:Boolean = false, altKey:Boolean = false, shiftKey:Boolean = false, buttonDown:Boolean = false, delta:int = 0) {
 			super(type, bubbles, cancelable, localX, localY, relatedObject, ctrlKey, altKey, shiftKey, buttonDown, delta);
+		}
+		
+		override public function toString():String {
+			return formatToString("DragerEvent", "type", "bubbles", "cancelable", "localX", "localY")
+		}
+		
+		override public function clone():Event {
+			return new DragerEvent(type, bubbles, cancelable, localX, localY, relatedObject, ctrlKey, altKey, shiftKey, buttonDown, delta);
 		}
 	}
 }

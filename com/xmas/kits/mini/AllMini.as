@@ -1,5 +1,6 @@
 package com.xmas.kits.mini {
 	import com.xmas.kits.Slider;
+	import com.xmas.utils.DragerEvent;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -18,7 +19,7 @@ package com.xmas.kits.mini {
 		private var miniBox:MiniBox;
 		private var miniPrompt:MiniPrompt;
 		private var miniWindow:MiniWindow;
-		private var miniSlider:MiniSlider;
+		private var miniSlider:MiniHSlider;
 		
 		public function AllMini() {
 			//---------------------------
@@ -65,10 +66,14 @@ package com.xmas.kits.mini {
 			miniPrompt.submitButton.addEventListener(MouseEvent.CLICK, submitButton_click);
 			miniPrompt.closeButton.addEventListener(MouseEvent.CLICK, closeButton_click);
 			//--------------------
-			miniSlider = new MiniSlider();
-			miniSlider.move(300,100)
+			miniSlider = new MiniHSlider();
+			miniSlider.move(300, 100)
+			miniSlider.addEventListener(DragerEvent.DRAG, miniSlider_drag);
 			addChild(miniSlider)
-			//miniSlider.
+		}
+		
+		private function miniSlider_drag(e:DragerEvent):void {
+			trace(miniSlider.ratio)
 		}
 		
 		private function closeButton_click(e:MouseEvent):void {

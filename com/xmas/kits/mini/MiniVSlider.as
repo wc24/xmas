@@ -6,14 +6,13 @@ package com.xmas.kits.mini {
 	 * ...
 	 * @author 蓝面包
 	 */
-	public class MiniSlider extends Slider {
+	public class MiniVSlider extends Slider {
 		private var sliderVo:SliderVo;
 		
-		public function MiniSlider() {
+		public function MiniVSlider(long:int=100) {
 			sliderVo = new SliderVo();
-			sliderVo.width = 100;
-			sliderVo.height = 100;
-			sliderVo.slip = new MiniButton("|||")
+			sliderVo.height = long;
+			sliderVo.slip = new MiniButton("=")
 			super(sliderVo);
 		}
 	}
