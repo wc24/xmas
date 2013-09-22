@@ -142,6 +142,8 @@ package com.xmas.utils {
 				}
 				//changeX = _mouseX;
 				//changeY = _mouseY;
+				
+			trace("cc")
 				dispatchEvent(new DragerEvent(DragerEvent.DRAG, true, false, dragObject.x, dragObject.y));
 			}
 		}

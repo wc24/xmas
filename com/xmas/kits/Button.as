@@ -34,7 +34,6 @@ package com.xmas.kits {
 			addChild(_downSkin)
 			addChild(_overSkin)
 			addChild(_disableSkin)
-			addChild(_buttonVo.label)
 			state = Button.NORMAL
 		}
 		private function mouseDown(e:MouseEvent):void {
@@ -51,7 +50,6 @@ package com.xmas.kits {
 		}
 		override public function set enabled(value:Boolean):void {
 			super.enabled = value;
-			_buttonVo.label.enabled = value;
 			if (value) {
 				state = Button.NORMAL
 			} else {
@@ -81,13 +79,6 @@ package com.xmas.kits {
 					_disableSkin.visible = true;
 					break;
 			}
-		}
-		public function get label():String {
-			return _buttonVo.label.text;
-		}
-		public function set label(value:String):void {
-			_buttonVo.label.text = value;
-			redraw()
 		}
 	}
 }

@@ -19,7 +19,7 @@ package com.xmas.kits.mini {
 		private var miniBox:MiniBox;
 		private var miniPrompt:MiniPrompt;
 		private var miniWindow:MiniWindow;
-		private var miniSlider:MiniHSlider;
+		private var miniSlider:MiniVSlider;
 		
 		public function AllMini() {
 			//---------------------------
@@ -66,10 +66,15 @@ package com.xmas.kits.mini {
 			miniPrompt.submitButton.addEventListener(MouseEvent.CLICK, submitButton_click);
 			miniPrompt.closeButton.addEventListener(MouseEvent.CLICK, closeButton_click);
 			//--------------------
-			miniSlider = new MiniHSlider();
+			miniSlider = new MiniVSlider();
 			miniSlider.move(300, 100)
 			miniSlider.addEventListener(DragerEvent.DRAG, miniSlider_drag);
 			addChild(miniSlider)
+			
+			var miniHScrollbar:MiniHScrollbar = new MiniHScrollbar(150);
+			miniHScrollbar.move(400, 100)
+			addChild(miniHScrollbar);
+			
 		}
 		
 		private function miniSlider_drag(e:DragerEvent):void {
@@ -92,12 +97,13 @@ package com.xmas.kits.mini {
 		}
 		
 		private function enabledButton_click(e:MouseEvent):void {
-			//miniButton.enabled = !miniButton.enabled;
-			//miniLabel.enabled = !miniLabel.enabled;
-			//colorButton.enabled = !colorButton.enabled
-			//enabledButton.label = "ENABLED:" + !miniLabel.enabled;
-			//miniTextButton.enabled = !miniTextButton.enabled
+			miniButton.enabled = !miniButton.enabled;
+			miniLabel.enabled = !miniLabel.enabled;
+			colorButton.enabled = !colorButton.enabled
+			enabledButton.label = "ENABLED:" + !miniLabel.enabled;
+			miniTextButton.enabled = !miniTextButton.enabled
 			miniPrompt.enabled = !miniPrompt.enabled
+			miniSlider.ratio+=0.1
 		}
 	}
 }
