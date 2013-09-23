@@ -1,4 +1,5 @@
-package com.xmas.utils {
+package com.xmas.core {
+	import com.xmas.utils.Wildcard;
 	
 	/**
 	 * ...
