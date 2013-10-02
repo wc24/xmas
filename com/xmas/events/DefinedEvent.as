@@ -4,7 +4,7 @@ package com.xmas.events {
 	public class DefinedEvent extends Event {
 		private var _data:Object;
 		
-		public function DefinedEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false, data:Object) {
+		public function DefinedEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false, data:Object=null) {
 			super(type, bubbles, cancelable)
 			_data = data;
 		}
