@@ -23,6 +23,7 @@ package com.xmas.core {
 			_pool.push("使用了错误的\"errorID\" errorID: {0} 超过了，已拥有的错误总数: {0} .")
 			_pool.push("激活Drager类时area对象必须在舞台上")
 			_pool.push("请在执行action方法后使用本方法")
+			_pool.push("url所指向不是合法位图")//3
 			return _pool;
 		}
 	}
