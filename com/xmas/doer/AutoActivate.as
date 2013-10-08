@@ -2,7 +2,6 @@ package com.xmas.doer {
 	import com.xmas.standard.IEasy;
 	import flash.display.DisplayObject;
 	import flash.events.Event;
-	import part.SepLoading;
 	/**
 	 * ...
 	 * @author 蓝面包
