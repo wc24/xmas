@@ -11,17 +11,19 @@ package com.xmas.utils {
 		private var target:DisplayObject;
 		private var alignRatioX:Number;
 		private var alignRatioY:Number;
-		private var offsetX:int;
-		private var offsetY:int;
+		private var _offsetX:int;
+		private var _offsetY:int;
 		private var boundRect:Rectangle;
 		private var noBoundRect:Rectangle = new Rectangle();
-		public var careSize:Boolean = true;
+		private var widthRatio:Number;
+		private var heightRatio:Number;
 		public static var pool:Dictionary = new Dictionary(true);
 		
-		public function SelfAdaption(target:DisplayObject, alignRatioX:Number = 0, alignRatioY:Number = 0, offsetX:int = 0, offsetY:int = 0, careSize:Boolean = true) {
-			this.careSize = careSize;
-			this.offsetY = offsetY;
-			this.offsetX = offsetX;
+		public function SelfAdaption(target:DisplayObject, alignRatioX:Number = 0, alignRatioY:Number = 0, offsetX:int = 0, offsetY:int = 0, widthRatio:Number = 1, heightRatio:Number = 1) {
+			_offsetY = offsetY;
+			_offsetX = offsetX;
+			this.heightRatio = heightRatio;
+			this.widthRatio = widthRatio;
 			this.alignRatioX = bound(alignRatioX, 0, 1);
 			this.alignRatioY = bound(alignRatioY, 0, 1);
 			this.target = target;
@@ -32,8 +34,8 @@ package com.xmas.utils {
 			}
 		}
 		
-		public static function addDisplay(target:DisplayObject, alignRatioX:Number = 0, alignRatioY:Number = 0, offsetX:int = 0, offsetY:int = 0, careSize:Boolean = true):SelfAdaption {
-			var selfAdaption:SelfAdaption = new SelfAdaption(target, alignRatioX, alignRatioY, offsetX, offsetY);
+		public static function addDisplay(target:DisplayObject, alignRatioX:Number = 0, alignRatioY:Number = 0, offsetX:int = 0, offsetY:int = 0, widthRatio:Number = 1, heightRatio:Number = 1):SelfAdaption {
+			var selfAdaption:SelfAdaption = new SelfAdaption(target, alignRatioX, alignRatioY, offsetX, offsetY, widthRatio, heightRatio);
 			removeDisplay(target);
 			pool[target] = selfAdaption
 			return selfAdaption
@@ -77,9 +79,9 @@ package com.xmas.utils {
 			if (target is ISelfAdaption) {
 				(target as ISelfAdaption).upStageSize(target.stage.stageWidth, target.stage.stageHeight);
 			}
-			boundRect = careSize ? target.getBounds(target) : noBoundRect;
-			target.x = (target.stage.stageWidth - boundRect.width - boundRect.x * 2) * alignRatioX + offsetX;
-			target.y = (target.stage.stageHeight - boundRect.height - boundRect.y * 2) * alignRatioY + offsetY;
+			boundRect = target.getBounds(target);
+			target.x = (target.stage.stageWidth - (boundRect.width + boundRect.x * 2) * widthRatio) * alignRatioX + _offsetX;
+			target.y = (target.stage.stageHeight - (boundRect.height + boundRect.y * 2) * heightRatio) * alignRatioY + _offsetY;
 		}
 		
 		private function resize(e:Event):void {
@@ -92,6 +94,24 @@ package com.xmas.utils {
 		
 		private function target_addedToStage(e:Event):void {
 			activate()
+		}
+		
+		public function get offsetX():int {
+			return _offsetX;
+		}
+		
+		public function set offsetX(value:int):void {
+			_offsetX = value;
+			update()
+		}
+		
+		public function get offsetY():int {
+			return _offsetY;
+		}
+		
+		public function set offsetY(value:int):void {
+			_offsetY = value;
+			update()
 		}
 	}
 }
