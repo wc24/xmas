@@ -116,6 +116,7 @@ package com.xmas.utils {
 		
 		public function set boundRect(value:Rectangle):void {
 			_boundRect = value;
+			upbound();
 		}
 		
 		private function area_mouseOut(e:MouseEvent):void {
