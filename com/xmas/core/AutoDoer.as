@@ -4,14 +4,14 @@ package com.xmas.core {
 	import flash.display.DisplayObject;
 	import flash.display.Stage;
 	import flash.events.Event;
-	import flash.events.EventDispatcher;
+	import flash.events.IEventDispatcher;
 	/**
 	 * 开发类
 	 * @author 蓝面包
 	 */
 	public class AutoDoer extends Doer implements IEasy {
 		private var autoActivate:AutoActivate;
-		public function AutoDoer(dispatcher:EventDispatcher = null) {
+		public function AutoDoer(dispatcher:IEventDispatcher = null) {
 			super(dispatcher);
 			autoActivate = new AutoActivate(this);
 		}

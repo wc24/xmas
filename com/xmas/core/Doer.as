@@ -4,9 +4,9 @@ package com.xmas.core {
 	import flash.events.EventDispatcher;
 	
 	public class Doer implements IEventDispatcher {
-		private var _dispatcher:EventDispatcher;
+		private var _dispatcher:IEventDispatcher;
 		
-		public function Doer(dispatcher:EventDispatcher = null) {
+		public function Doer(dispatcher:IEventDispatcher = null) {
 			_dispatcher = dispatcher;
 			if (_dispatcher == null) {
 				_dispatcher = new EventDispatcher(this);
@@ -34,11 +34,11 @@ package com.xmas.core {
 			_dispatcher.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}
 		
-		public function get dispatcher():EventDispatcher {
+		public function get dispatcher():IEventDispatcher {
 			return _dispatcher;
 		}
 		
-		public function set dispatcher(value:EventDispatcher):void {
+		public function set dispatcher(value:IEventDispatcher):void {
 			_dispatcher = value;
 		}
 	}

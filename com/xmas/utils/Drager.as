@@ -3,9 +3,9 @@ package com.xmas.utils {
 	import com.xmas.events.PlusMouseEvent;
 	import com.xmas.original.PlaneMoveVo;
 	import com.xmas.plus.PlusMouseDrag;
-	import com.xmas.standard.IDragObject;
+	import com.xmas.standard.IPoint;
 	import flash.display.InteractiveObject;
-	import flash.events.EventDispatcher;
+	import flash.events.IEventDispatcher;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	import flash.ui.Mouse;
@@ -16,13 +16,13 @@ package com.xmas.utils {
 	 * @author 蓝面包
 	 */
 	public class Drager extends PlusMouseDrag {
-		private var dragObject:IDragObject;
+		private var dragObject:IPoint;
 		private var planeMoveVo:PlaneMoveVo
 		private var _boundRect:Rectangle;
 		private var _useHandCursor:Boolean;
 		private var _boundStage:Boolean;
 		
-		public function Drager(dispatcher:EventDispatcher = null) {
+		public function Drager(dispatcher:IEventDispatcher = null) {
 			super(dispatcher);
 			planeMoveVo = new PlaneMoveVo();
 			//_useHandCursor = true;
@@ -33,7 +33,7 @@ package com.xmas.utils {
 		 * @param	dragObject 拖动目标
 		 * @param	area 拖动区域
 		 */
-		public function start(dragObject:IDragObject, area:InteractiveObject):void {
+		public function start(dragObject:IPoint, area:InteractiveObject):void {
 			this.dragObject = dragObject;
 			interactiveObject = area;
 		}

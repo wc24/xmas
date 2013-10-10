@@ -1,5 +1,6 @@
 package com.xmas.standard {
-	public interface IDragObject {
+	
+	public interface IPoint {
 		function get x():Number;
 		function set x(value:Number):void;
 		function get y():Number;

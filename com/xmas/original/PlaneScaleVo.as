@@ -1,11 +1,11 @@
 package com.xmas.original {
-	import com.xmas.standard.IDragObject;
+	import com.xmas.standard.IPoint;
 	
 	/**
 	 * ...
 	 * @author 蓝面包
 	 */
-	public class PlaneScaleVo implements IDragObject {
+	public class PlaneScaleVo implements IPoint {
 		private var _width:int = 100;
 		private var _height:int = 100;
 		private var _x:Number = 0;
@@ -16,7 +16,7 @@ package com.xmas.original {
 			this.width = width;
 		}
 		
-		/* INTERFACE com.xmas.utils.IDragObject */
+		/* INTERFACE com.xmas.utils.IPoint */
 		public function get x():Number {
 			return _x;
 		}

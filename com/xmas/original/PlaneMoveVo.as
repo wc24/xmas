@@ -1,5 +1,5 @@
 package com.xmas.original {
-	import com.xmas.standard.IDragObject;
+	import com.xmas.standard.IPoint;
 	
 	public class PlaneMoveVo {
 		private var _scale:Number

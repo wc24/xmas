@@ -3,6 +3,7 @@ package com.xmas.plus {
 	import com.xmas.events.PlusMouseEvent;
 	import flash.display.InteractiveObject;
 	import flash.events.EventDispatcher;
+	import flash.events.IEventDispatcher;
 	import flash.events.MouseEvent;
 	/**
 	 * free 鼠标拖动事件。
@@ -19,7 +20,7 @@ package com.xmas.plus {
 		private var _interactiveObject:InteractiveObject;
 		public static var isDragUp:Boolean = false;
 		
-		public function PlusMouseDrag(dispatcher:EventDispatcher = null) {
+		public function PlusMouseDrag(dispatcher:IEventDispatcher = null) {
 			super(dispatcher);
 		}
 		

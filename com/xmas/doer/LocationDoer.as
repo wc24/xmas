@@ -1,11 +1,11 @@
 package com.xmas.doer {
-	import com.xmas.standard.IDragObject;
+	import com.xmas.standard.IPoint;
 	
 	/**
 	 * ...
 	 * @author 蓝面包
 	 */
-	public class LocationDoer implements IDragObject {
+	public class LocationDoer implements IPoint {
 		private var target:Object;
 		
 		public function LocationDoer(target:Object) {
@@ -15,7 +15,7 @@ package com.xmas.doer {
 			}
 		}
 		
-		/* INTERFACE com.xmas.standard.IDragObject */
+		/* INTERFACE com.xmas.standard.IPoint */
 		public function get x():Number {
 			return target["x"];
 		}
