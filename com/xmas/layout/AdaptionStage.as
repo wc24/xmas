@@ -10,25 +10,25 @@ package com.xmas.layout {
 	
 	public class AdaptionStage implements IEasy {
 		private var target:DisplayObject;
-		private var RatioH:Number;
-		private var RatioV:Number;
+		private var ratioH:Number;
+		private var ratioV:Number;
 		private var _offsetX:int;
 		private var _offsetY:int;
 		private var noBoundRect:Rectangle = new Rectangle();
 		private var autoActivate:AutoActivate;
 		public static var pool:Dictionary = new Dictionary(true);
 		
-		public function AdaptionStage(target:DisplayObject, RatioH:Number = 0, RatioV:Number = 0, offsetX:int = 0, offsetY:int = 0) {
+		public function AdaptionStage(target:DisplayObject, ratioH:Number = 0, ratioV:Number = 0, offsetX:int = 0, offsetY:int = 0) {
 			_offsetY = offsetY;
 			_offsetX = offsetX;
-			this.RatioH = bound(RatioH, 0, 1);
-			this.RatioV = bound(RatioV, 0, 1);
+			this.ratioH = bound(ratioH, 0, 1);
+			this.ratioV = bound(ratioV, 0, 1);
 			this.target = target;
 			autoActivate = new AutoActivate(this, target)
 		}
 		
-		public static function addDisplay(target:DisplayObject, RatioH:Number = 0, RatioV:Number = 0, offsetX:int = 0, offsetY:int = 0):AdaptionStage {
-			var adaptionStage:AdaptionStage = new AdaptionStage(target, RatioH, RatioV, offsetX, offsetY);
+		public static function addDisplay(target:DisplayObject, ratioH:Number = 0, ratioV:Number = 0, offsetX:int = 0, offsetY:int = 0):AdaptionStage {
+			var adaptionStage:AdaptionStage = new AdaptionStage(target, ratioH, ratioV, offsetX, offsetY);
 			removeDisplay(target);
 			pool[target] = adaptionStage
 			return adaptionStage
@@ -66,8 +66,8 @@ package com.xmas.layout {
 		}
 		
 		private function update():void {
-			target.x = target.stage.stageWidth * RatioH + _offsetX;
-			target.y = target.stage.stageHeight * RatioV + _offsetY;
+			target.x = target.stage.stageWidth * ratioH + _offsetX;
+			target.y = target.stage.stageHeight * ratioV + _offsetY;
 		}
 		
 		private function resize(e:Event):void {

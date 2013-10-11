@@ -6,7 +6,7 @@ package com.xmas.doer {
 	 * @author 蓝面包
 	 */
 	public class LocationDoer implements IPoint {
-		private var target:Object;
+		public var target:Object;
 		
 		public function LocationDoer(target:Object) {
 			this.target = target;
