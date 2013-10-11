@@ -15,7 +15,7 @@ package com.xmas.standard {
 		function set spaceV(value:int):void;
 		function get spaceV():int;
 		function get length():uint;
-		function add(target:IRectangle):int
+		function add(target:IRectangle):void
 		function addDisplay(target:DisplayObject):IRectangle
 		function addContainer(target:DisplayObjectContainer, order:Boolean = true):void
 		function remove(target:Object):IRectangle
