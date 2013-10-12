@@ -8,10 +8,9 @@ package com.xmas.layout {
 	public class OrderlyLayout extends LayoutCore {
 		public var ratioH:Number = 0
 		public var ratioV:Number = 0
-		private var careContainer:Boolean;
+		public var careContainer:Boolean=true;
 		
-		public function OrderlyLayout(boundRect:Rectangle, spaceH:int = 100, spaceV:int = 100, careContainer:Boolean = true) {
-			this.careContainer = careContainer;
+		public function OrderlyLayout(boundRect:Rectangle, spaceH:int = 100, spaceV:int = 100) {
 			super(boundRect, spaceH, spaceV)
 		}
 		
