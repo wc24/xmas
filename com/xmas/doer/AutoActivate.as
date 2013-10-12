@@ -10,8 +10,8 @@ package com.xmas.doer {
 		private var _target:DisplayObject;
 		private var easy:IEasy;
 		public function AutoActivate(easy:IEasy, target:DisplayObject=null) {
-			this.target = target;
 			this.easy = easy;
+			this.target = target;
 		}
 		/* INTERFACE com.xmas.standard.IEasy */
 		public function deactivate():void {
