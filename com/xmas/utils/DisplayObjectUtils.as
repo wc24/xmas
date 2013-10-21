@@ -10,6 +10,7 @@ package com.xmas.utils {
 		}
 		
 		static public function fitOutside(displayObject:DisplayObject, width:int, height:int):void {
+			displayObject.scaleX = displayObject.scaleY = 1;
 			var scale:Number = Math.max(width / displayObject.width, height / displayObject.height);
 			displayObject.scaleX = displayObject.scaleY = scale;
 			displayObject.x = width - displayObject.width >> 1;
