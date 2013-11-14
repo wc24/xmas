@@ -1,6 +1,8 @@
-package com.xmas.layout {
+package com.xmas.layout
+{
 	import com.xmas.doer.AutoActivate;
 	import com.xmas.standard.IAdaptionStage;
+	import com.xmas.standard.IAlign;
 	import com.xmas.standard.IEasy;
 	import com.xmas.utils.bound;
 	import flash.display.DisplayObject;
@@ -8,84 +10,146 @@ package com.xmas.layout {
 	import flash.geom.Rectangle;
 	import flash.utils.Dictionary;
 	
-	public class AdaptionStage implements IEasy {
+	public class AdaptionStage implements IEasy, IAlign
+	{
 		private var target:DisplayObject;
-		private var ratioH:Number;
-		private var ratioV:Number;
+		private var _alignX:Number;
+		private var _alignY:Number;
 		private var _offsetX:int;
 		private var _offsetY:int;
 		private var noBoundRect:Rectangle = new Rectangle();
 		private var autoActivate:AutoActivate;
 		public static var pool:Dictionary = new Dictionary(true);
 		
-		public function AdaptionStage(target:DisplayObject, ratioH:Number = 0, ratioV:Number = 0, offsetX:int = 0, offsetY:int = 0) {
+		public function AdaptionStage(target:DisplayObject, alignX:Number = 0, alignY:Number = 0, offsetX:int = 0, offsetY:int = 0)
+		{
 			_offsetY = offsetY;
 			_offsetX = offsetX;
-			this.ratioH = bound(ratioH, 0, 1);
-			this.ratioV = bound(ratioV, 0, 1);
+			this.alignX = alignX;
+			this.alignY = alignY;
 			this.target = target;
 			autoActivate = new AutoActivate(this, target)
 		}
 		
-		public static function addDisplay(target:DisplayObject, ratioH:Number = 0, ratioV:Number = 0, offsetX:int = 0, offsetY:int = 0):AdaptionStage {
-			var adaptionStage:AdaptionStage = new AdaptionStage(target, ratioH, ratioV, offsetX, offsetY);
+		public static function addDisplay(target:DisplayObject, alignX:Number = 0, alignY:Number = 0, offsetX:int = 0, offsetY:int = 0):AdaptionStage
+		{
+			var adaptionStage:AdaptionStage = new AdaptionStage(target, alignX, alignY, offsetX, offsetY);
 			removeDisplay(target);
 			pool[target] = adaptionStage
 			return adaptionStage
 		}
 		
-		public static function getAdaptionStage(target:DisplayObject):AdaptionStage {
+		public static function getAdaptionStage(target:DisplayObject):AdaptionStage
+		{
 			return pool[target] as AdaptionStage
 		}
 		
-		public static function clear():void {
+		public static function clear():void
+		{
 			pool = new Dictionary(true);
 		}
 		
-		public static function removeDisplay(target:DisplayObject):void {
-			if (getAdaptionStage(target) != null) {
+		public static function removeDisplay(target:DisplayObject):void
+		{
+			if (getAdaptionStage(target) != null)
+			{
 				getAdaptionStage(target).destroy();
 			}
 			delete pool[target]
 		}
 		
 		/* INTERFACE com.xmas.standard.IEasy */
-		public function deactivate():void {
+		public function deactivate():void
+		{
 			target.stage.removeEventListener(Event.RESIZE, resize);
 		}
 		
-		public function activate():void {
+		public function activate():void
+		{
 			target.stage.addEventListener(Event.RESIZE, resize);
-			update()
+			resize()
 		}
 		
-		public function destroy():void {
+		public function destroy():void
+		{
 			deactivate()
 			autoActivate.destroy();
 			target = null;
 		}
 		
-		private function update():void {
-			target.x = target.stage.stageWidth * ratioH + _offsetX;
-			target.y = target.stage.stageHeight * ratioV + _offsetY;
+		public function update():void
+		{
+			target.x = target.stage.stageWidth * alignX + _offsetX;
+			target.y = target.stage.stageHeight * alignY + _offsetY;
 		}
 		
-		private function resize(e:Event):void {
-			if (target is IAdaptionStage) {
+		private function resize(e:Event = null):void
+		{
+			if (target is IAdaptionStage)
+			{
 				(target as IAdaptionStage).upStageSize(target.stage.stageWidth, target.stage.stageHeight);
 			}
 			update()
 		}
 		
-		public function offsetTo(offsetX:int, offsetY:int):void {
+		public function reset(alignX:Number = 0, alignY:Number = 0, offsetX:int = 0, offsetY:int = 0):void
+		{
+			_alignX = bound(alignX, 0, 1);
+			_alignY = bound(alignY, 0, 1);
 			_offsetX = offsetX;
 			_offsetY = offsetY;
 			update()
 		}
 		
-		public function offset(x:int, y:int):void {
-			_offsetX += x;
-			_offsetY += y;
+		/* INTERFACE com.xmas.standard.IAlign */
+		public function align(alignX:Number, alignY:Number):void
+		{
+			_alignX = bound(alignX, 0, 1);
+			_alignY = bound(alignY, 0, 1);
+			updata()
+		}
+		
+		public function get offsetX():int
+		{
+			return _offsetX;
+		}
+		
+		public function set offsetX(value:int):void
+		{
+			_offsetX = value;
+			update()
+		}
+		
+		public function get offsetY():int
+		{
+			return _offsetY;
+		}
+		
+		public function set offsetY(value:int):void
+		{
+			_offsetY = value;
+			update()
+		}
+		
+		public function get alignX():Number
+		{
+			return _alignX;
+		}
+		
+		public function set alignX(value:Number):void
+		{
+			_alignX = bound(value, 0, 1);
+			update()
+		}
+		
+		public function get alignY():Number
+		{
+			return _alignY;
+		}
+		
+		public function set alignY(value:Number):void
+		{
+			_alignY = bound(value, 0, 1);
 			update()
 		}
 	}

@@ -1,7 +1,7 @@
 package com.xmas.utils {
 	import com.xmas.core.XmasError;
 	import com.xmas.events.PlusMouseEvent;
-	import com.xmas.original.PlaneMoveVo;
+	import com.xmas.original.PlaneMoveVO;
 	import com.xmas.plus.PlusMouseDrag;
 	import com.xmas.standard.IPoint;
 	import flash.display.InteractiveObject;
@@ -17,14 +17,14 @@ package com.xmas.utils {
 	 */
 	public class Drager extends PlusMouseDrag {
 		private var dragObject:IPoint;
-		private var planeMoveVo:PlaneMoveVo
+		private var planeMoveVO:PlaneMoveVO
 		private var _boundRect:Rectangle;
 		private var _useHandCursor:Boolean;
 		private var _boundStage:Boolean;
 		
 		public function Drager(dispatcher:IEventDispatcher = null) {
 			super(dispatcher);
-			planeMoveVo = new PlaneMoveVo();
+			planeMoveVO = new PlaneMoveVO();
 			//_useHandCursor = true;
 		}
 		
@@ -50,18 +50,18 @@ package com.xmas.utils {
 		}
 		
 		private function down(e:MouseEvent):void {
-			planeMoveVo.start(stage.mouseX, stage.mouseY);
-			planeMoveVo.x = dragObject.x;
-			planeMoveVo.y = dragObject.y;
+			planeMoveVO.start(stage.mouseX, stage.mouseY);
+			planeMoveVO.x = dragObject.x;
+			planeMoveVO.y = dragObject.y;
 		}
 		
 		private function free(e:PlusMouseEvent):void {
 		}
 		
 		private function drag(e:PlusMouseEvent):void {
-			planeMoveVo.end(boundStage ? bound(stage.mouseX, 0, stage.stageWidth) : stage.mouseX, boundStage ? bound(stage.mouseY, 0, stage.stageHeight) : stage.mouseY);
-			dragObject.x = planeMoveVo.x;
-			dragObject.y = planeMoveVo.y;
+			planeMoveVO.end(boundStage ? bound(stage.mouseX, 0, stage.stageWidth) : stage.mouseX, boundStage ? bound(stage.mouseY, 0, stage.stageHeight) : stage.mouseY);
+			dragObject.x = planeMoveVO.x;
+			dragObject.y = planeMoveVO.y;
 			upbound();
 		}
 		

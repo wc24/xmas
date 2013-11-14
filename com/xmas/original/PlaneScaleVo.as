@@ -5,13 +5,13 @@ package com.xmas.original {
 	 * ...
 	 * @author 蓝面包
 	 */
-	public class PlaneScaleVo implements IPoint {
+	public class PlaneScaleVO implements IPoint {
 		private var _width:int = 100;
 		private var _height:int = 100;
 		private var _x:Number = 0;
 		private var _y:Number = 0;
 		
-		public function PlaneScaleVo(width:int, height:int) {
+		public function PlaneScaleVO(width:int, height:int) {
 			this.height = height;
 			this.width = width;
 		}

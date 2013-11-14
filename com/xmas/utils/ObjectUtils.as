@@ -1,5 +1,4 @@
 package com.xmas.utils {
-	
 	/**
 	 * 对象属性变化
 	 * */
@@ -9,7 +8,6 @@ package com.xmas.utils {
 		 */
 		public function ObjectUtils() {
 		}
-		
 		/**
 		 * 返回目标对象属性长度
 		 * @param object 目标对象
@@ -20,6 +18,7 @@ package com.xmas.utils {
 		   {
 		   import easy.core.utils.ObjectUtils;
 		   import flash.display.Sprite;
+		   import vo.ImagePrestrainVo;
 		
 		   public class Main extends Sprite
 		   {
@@ -40,7 +39,6 @@ package com.xmas.utils {
 			}
 			return num;
 		}
-		
 		/**
 		 * 合并重新取值,根据新值对象属性,更新目标对象属性或添加新属性
 		 * @param object 目标对象
@@ -78,7 +76,6 @@ package com.xmas.utils {
 				}
 			}
 		}
-		
 		/**
 		 * 更新 更新目标对象内属性，根据目标对象属性查找新值
 		 * @example
@@ -117,7 +114,6 @@ package com.xmas.utils {
 			}
 			return target;
 		}
-		
 		/**
 		 * 位置、大小模仿
 		 * @example
@@ -159,7 +155,6 @@ package com.xmas.utils {
 			}
 			return target;
 		}
-		
 		/**
 		 * 列出对象
 		 * @example
@@ -188,7 +183,6 @@ package com.xmas.utils {
 			}
 			return "{" + outvar.join(",") + "}";
 		}
-		
 		/**
 		 * 目标对象替换字符串
 		 * @param object  目标对象
@@ -197,7 +191,20 @@ package com.xmas.utils {
 		public static function delEnter(object:Object):String {
 			return object.toString().replace(/\r\n/ig, "\r");
 		}
-		
+		static public function toStringFormat(object:Object, ... arg):String {
+			var string:String = "[" + noClass(object["constructor"])
+			for each (var item:String in arg) {
+				string += " "
+				string += item
+				string += "="
+				string += object[item] == null ? "null" : object[item]
+			}
+			string += "]"
+			return string
+		}
+		static private function noClass(string:String):String {
+			return string.slice(7, string.length - 1);
+		}
 		public static function get BAWMatrix():Array {
 			return new Array(1 / 3, 1 / 3, 1 / 3, 0, 0, 1 / 3, 1 / 3, 1 / 3, 0, 0, 1 / 3, 1 / 3, 1 / 3, 0, 0, 0, 0, 0, 1, 0);
 		}

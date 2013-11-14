@@ -1,7 +1,7 @@
 package com.xmas.original {
 	import com.xmas.standard.IPoint;
 	
-	public class PlaneMoveVo {
+	public class PlaneMoveVO {
 		private var _scale:Number
 		private var _startX:Number
 		private var _startY:Number
@@ -10,7 +10,7 @@ package com.xmas.original {
 		private var _x:Number;
 		private var _y:Number;
 		
-		public function PlaneMoveVo() {
+		public function PlaneMoveVO() {
 			_x = 0;
 			_y = 0;
 			_scale = 1;
