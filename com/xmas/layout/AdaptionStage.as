@@ -20,7 +20,7 @@ package com.xmas.layout
 		private var _offsetY:int;
 		private var noBoundRect:Rectangle = new Rectangle();
 		private var autoActivate:AutoActivate;
-		public var careSelf:Boolean = true;
+		public var careSelf:Boolean = false;
 		public static var pool:Dictionary = new Dictionary(true);
 		
 		public function AdaptionStage(target:DisplayObject, alignX:Number = 0, alignY:Number = 0, offsetX:int = 0, offsetY:int = 0)
@@ -41,12 +41,12 @@ package com.xmas.layout
 			return adaptionStage
 		}
 		
-		public static function addNoCareSelfDisplay(target:DisplayObject, alignX:Number = 0, alignY:Number = 0, offsetX:int = 0, offsetY:int = 0):AdaptionStage
+		public static function addDisplayCareSelf(target:DisplayObject, alignX:Number = 0, alignY:Number = 0, offsetX:int = 0, offsetY:int = 0):AdaptionStage
 		{
 			var adaptionStage:AdaptionStage = new AdaptionStage(target, alignX, alignY, offsetX, offsetY);
 			removeDisplay(target);
 			pool[target] = adaptionStage
-			adaptionStage.careSelf = false;
+			adaptionStage.careSelf = true;
 			return adaptionStage
 		}
 		
