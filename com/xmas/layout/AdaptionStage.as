@@ -4,13 +4,14 @@ package com.xmas.layout
 	import com.xmas.standard.IAdaptionStage;
 	import com.xmas.standard.IAlign;
 	import com.xmas.standard.IEasy;
+	import com.xmas.standard.IOffset;
 	import com.xmas.utils.bound;
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
 	import flash.utils.Dictionary;
 	
-	public class AdaptionStage implements IEasy, IAlign
+	public class AdaptionStage implements IEasy, IAlign, IOffset
 	{
 		private var target:DisplayObject;
 		private var _alignX:Number;
@@ -19,6 +20,7 @@ package com.xmas.layout
 		private var _offsetY:int;
 		private var noBoundRect:Rectangle = new Rectangle();
 		private var autoActivate:AutoActivate;
+		public var careSelf:Boolean = true;
 		public static var pool:Dictionary = new Dictionary(true);
 		
 		public function AdaptionStage(target:DisplayObject, alignX:Number = 0, alignY:Number = 0, offsetX:int = 0, offsetY:int = 0)
@@ -36,6 +38,15 @@ package com.xmas.layout
 			var adaptionStage:AdaptionStage = new AdaptionStage(target, alignX, alignY, offsetX, offsetY);
 			removeDisplay(target);
 			pool[target] = adaptionStage
+			return adaptionStage
+		}
+		
+		public static function addNoCareSelfDisplay(target:DisplayObject, alignX:Number = 0, alignY:Number = 0, offsetX:int = 0, offsetY:int = 0):AdaptionStage
+		{
+			var adaptionStage:AdaptionStage = new AdaptionStage(target, alignX, alignY, offsetX, offsetY);
+			removeDisplay(target);
+			pool[target] = adaptionStage
+			adaptionStage.careSelf = false;
 			return adaptionStage
 		}
 		
@@ -79,8 +90,16 @@ package com.xmas.layout
 		
 		public function update():void
 		{
-			target.x = target.stage.stageWidth * alignX + _offsetX;
-			target.y = target.stage.stageHeight * alignY + _offsetY;
+			if (careSelf)
+			{
+				target.x = (target.stage.stageWidth - target.width) * alignX + _offsetX;
+				target.y = (target.stage.stageWidth - target.height) * alignY + _offsetY;
+			}
+			else
+			{
+				target.x = target.stage.stageWidth * alignX + _offsetX;
+				target.y = target.stage.stageHeight * alignY + _offsetY;
+			}
 		}
 		
 		private function resize(e:Event = null):void
@@ -106,6 +125,13 @@ package com.xmas.layout
 		{
 			_alignX = bound(alignX, 0, 1);
 			_alignY = bound(alignY, 0, 1);
+			updata()
+		}
+		
+		public function offset(offsetX:int, offsetY:int):void
+		{
+			_offsetX = offsetX;
+			_offsetY = offsetY;
 			updata()
 		}
 		
