@@ -23,13 +23,14 @@ package com.xmas.layout
 		public var careSelf:Boolean = false;
 		public static var pool:Dictionary = new Dictionary(true);
 		
-		public function AdaptionStage(target:DisplayObject, alignX:Number = 0, alignY:Number = 0, offsetX:int = 0, offsetY:int = 0)
+		public function AdaptionStage(target:DisplayObject, alignX:Number = 0, alignY:Number = 0, offsetX:int = 0, offsetY:int = 0,careSelf:Boolean=false)
 		{
+			this.target = target;
+			this.careSelf = careSelf;
 			_offsetY = offsetY;
 			_offsetX = offsetX;
-			this.alignX = alignX;
-			this.alignY = alignY;
-			this.target = target;
+			_alignX = alignX;
+			_alignY = alignY;
 			autoActivate = new AutoActivate(this, target)
 		}
 		
@@ -43,10 +44,9 @@ package com.xmas.layout
 		
 		public static function addDisplayCareSelf(target:DisplayObject, alignX:Number = 0, alignY:Number = 0, offsetX:int = 0, offsetY:int = 0):AdaptionStage
 		{
-			var adaptionStage:AdaptionStage = new AdaptionStage(target, alignX, alignY, offsetX, offsetY);
+			var adaptionStage:AdaptionStage = new AdaptionStage(target, alignX, alignY, offsetX, offsetY,true);
 			removeDisplay(target);
 			pool[target] = adaptionStage
-			adaptionStage.careSelf = true;
 			return adaptionStage
 		}
 		
@@ -93,7 +93,7 @@ package com.xmas.layout
 			if (careSelf)
 			{
 				target.x = (target.stage.stageWidth - target.width) * alignX + _offsetX;
-				target.y = (target.stage.stageWidth - target.height) * alignY + _offsetY;
+				target.y = (target.stage.stageHeight - target.height) * alignY + _offsetY;
 			}
 			else
 			{
@@ -125,14 +125,14 @@ package com.xmas.layout
 		{
 			_alignX = bound(alignX, 0, 1);
 			_alignY = bound(alignY, 0, 1);
-			updata()
+			update()
 		}
 		
 		public function offset(offsetX:int, offsetY:int):void
 		{
 			_offsetX = offsetX;
 			_offsetY = offsetY;
-			updata()
+			update()
 		}
 		
 		public function get offsetX():int

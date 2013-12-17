@@ -1,7 +1,7 @@
 package com.xmas.original {
 	import com.xmas.standard.IPoint;
 	
-	public class PlaneMoveVO {
+	public class PlaneMoveVO implements IPoint {
 		private var _scale:Number
 		private var _startX:Number
 		private var _startY:Number
