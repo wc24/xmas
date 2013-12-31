@@ -49,6 +49,11 @@ package com.xmas.utils {
 			interactiveObject.addEventListener(MouseEvent.MOUSE_DOWN, down);
 		}
 		
+		override public function deactivate():void{
+			super.deactivate();
+			interactiveObject.removeEventListener(MouseEvent.MOUSE_DOWN, down);
+		}
+		
 		private function down(e:MouseEvent):void {
 			planeMoveVO.start(stage.mouseX, stage.mouseY);
 			planeMoveVO.x = dragObject.x;
