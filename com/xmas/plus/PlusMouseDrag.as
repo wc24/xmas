@@ -57,10 +57,8 @@ package com.xmas.plus {
 		}
 		
 		public function set interactiveObject(value:InteractiveObject):void {
-			if (_interactiveObject != value) {
-				if (_interactiveObject != null) {
-					deactivate()
-				}
+			if (_interactiveObject != value && _interactiveObject != null &&target.stage!=null ) {
+				deactivate();
 			}
 			_interactiveObject = value;
 			target = value;
